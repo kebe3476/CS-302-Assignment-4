@@ -1,0 +1,14 @@
+1. What operating system/environment did you run your program?
+	I am using macOS Monterey.
+
+2. How many threads were you able to run concurrently?
+	I was able to spawn 8 threads concurrently
+
+3. Describe your parallel algorithm (how you implemented it etc)
+	After I read in the matrices and after I have initialized the product matrix I set up the nested algorithm to multiply the two matrices. In the last nested loop is where I spawn the threads so that each time it loops through per iteration it spawns a new thread. Also as I spawn a new thread I pass in the   indexes to my multiplyVectors function to actually do the multiplication. Because all the matrices are globally declared I do not have a return. I do lock within the multiplyVectors function to avoid a race condition. Once my multiplication is done I make sure I am not spawning more threads than my machine can run. 
+
+4. Is your algorithm completely executed in parallel or is there any parts of your program that must run sequentially? (except for the portion in main that spawns the threads).
+	My algorithm is completely executed in parallel once the algorithm is done is when I print out my product matrix and that is done sequentially as well as my initial set up with reading in the two matrices. 
+	
+5. Is adding more threads going to automatically going to speed up your algorithm? Is there a threshold for the max amount of threads that can be spawned that would not cause a speed up if the amount of threads spawned goes beyond this threshold? (Assuming your system can spawn infinite amount of threads)? Assume you have two matrices n1 ×m1 and n2 ×m2, what is the threshold amount? (If any)
+	Adding more threads to my algorithm will not automatically speed up my program. In order to maximize the efficiency of using threads in parallel I would need to make sure that the thread count wouldn't go above the amount of CPU cores the machine has and in order to do so you need to scale the threads to match the CPU cores. 
